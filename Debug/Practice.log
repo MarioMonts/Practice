@@ -1,0 +1,7 @@
+﻿  Practice.cpp
+C:\Users\montesma\Desktop\Practice\Practice.cpp(356,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\montesma\Desktop\Practice\Practice.cpp(597,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\montesma\Desktop\Practice\Practice.cpp(749,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\montesma\Desktop\Practice\Practice.cpp(851,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\montesma\Desktop\Practice\Practice.cpp(969,16): warning C4018: '<': signed/unsigned mismatch
+  Practice.vcxproj -> C:\Users\montesma\Desktop\Practice\Debug\Practice.exe
