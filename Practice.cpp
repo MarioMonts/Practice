@@ -1,4 +1,3 @@
-
 /////Este archivo contiene las practicas hechas en clase con el profesor.
 
 #include <iostream>
@@ -37,14 +36,15 @@ int main()
 
 
     cout << "\n---Welcome to the Game TIC TAC TOE, let's play!---\n";
-    cout << "\nPlayer 1, the value you need to enter is O";
-    cout << "\nPlayer 2, the value you need to enter is X";
+    cout << "\nPlayer 1, you are playing with O's in the board";
+    cout << "\nPlayer 2, you are playing with X's in the board";
 
     cout << "\n";
 
 
     //Nota, nunca hacer VARIABLES fuera del main. Solo las CONSTANTES que no cambian, podrian definirse fuera del main.
 
+    //Codigo para crear la matriz
 
     const int ROWS = 3;
     const int COLUMNS = 3;
@@ -68,36 +68,51 @@ int main()
 
     }
 
+    
 
     do {
 
-
+        //Interaccion con el jugador 1
 
         cout << "\nPlayer 1 Turn:";
         cout << "\nWhich space in the board you want to fill in?";
-        cout << "\nChoose a number in the board\n";
+        cout << "\nChoose a number from the board\n";
         cin >> player1;
+        system("cls");
 
+        if (player1 != 'X')
 
-        for (int i = 0; i < ROWS; i++)
         {
 
-            for (int j = 0; j < COLUMNS; j++)
+            for (int i = 0; i < ROWS; i++)
             {
-                if (board[i][j] == player1)
-                {
 
-                    board[i][j] = 'O';
-                    attempts = attempts - 1;
+                for (int j = 0; j < COLUMNS; j++)
+                {
+                    if (board[i][j] == player1)
+                    {
+
+                        board[i][j] = 'O';
+                        attempts = attempts - 1;
+
+                    }
 
 
                 }
 
             }
 
+
+    
+
         }
 
+        else
+        {
 
+            cout << "invalid option. You have lost your turn" << endl;
+
+        }
 
         cout << "\n---TIC TAC TOE---\n";
         for (int i = 0; i < ROWS; i++)
@@ -114,30 +129,43 @@ int main()
         }
 
 
+        //Interaccion con el jugador 2
+
         cout << "\nPlayer 2 Turn:";
         cout << "\nWhich space in the board you want to fill in?";
         cout << "\nChoose a number in the board\n";
         cin >> player2;
+        system("cls");
 
-
-        for (int i = 0; i < ROWS; i++)
+        if (player2 != 'O')
         {
 
-            for (int j = 0; j < COLUMNS; j++)
+            for (int i = 0; i < ROWS; i++)
             {
-                if (board[i][j] == player2)
-                {
 
-                    board[i][j] = 'X';
-                    attempts = attempts - 1;
+                for (int j = 0; j < COLUMNS; j++)
+                {
+                    if (board[i][j] == player2)
+                    {
+
+                        board[i][j] = 'X';
+                        attempts = attempts - 1;
+
+                    }
 
                 }
 
             }
 
+
         }
 
+        else
+        {
 
+            cout << "invalid option. You have lost your turn" << endl;
+
+        }
 
         cout << "\n---TIC TAC TOE---\n";
         for (int i = 0; i < ROWS; i++)
@@ -156,17 +184,10 @@ int main()
     } while (attempts > 0);
 
 
-
-
-
-
-
-
+    cout << "\nThe board is already full!" << endl;
 
 
 }
-
-
 
 
 
