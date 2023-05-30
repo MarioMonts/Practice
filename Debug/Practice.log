@@ -1,7 +1,7 @@
 ﻿  Practice.cpp
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(378,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(619,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(771,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(873,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(991,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(462,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(703,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(855,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(957,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(1075,16): warning C4018: '<': signed/unsigned mismatch
   Practice.vcxproj -> C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Debug\Practice.exe

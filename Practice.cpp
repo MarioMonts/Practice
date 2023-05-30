@@ -186,7 +186,92 @@ int main()
 
     cout << "\nThe board is already full!" << endl;
 
+    //Determinacion del jugador ganador lado horizontal
 
+    cout << "\n";
+
+    if (board[0][0] == 'O' && board[0][1] == 'O' && board[0][2] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+   
+
+    if (board[0][0] == 'X' && board[0][1] == 'X' && board[0][2] == 'X')
+
+        cout << "\nPlayer 2 Wins!";
+
+
+    if (board[1][0] == 'O' && board[1][1] == 'O' && board[1][2] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+
+    if (board[1][0] == 'X' && board[1][1] == 'X' && board[1][2] == 'X')
+
+        cout << "\nPlayer 2 Wins!";
+
+
+    if (board[2][0] == 'O' && board[2][1] == 'O' && board[2][2] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+
+    if (board[2][0] == 'X' && board[2][1] == 'X' && board[2][2] == 'X')
+
+        cout << "\nPlayer 2 Wins!";
+
+    //Determinacion del jugador ganador lado vertical
+
+
+    if (board[0][0] == 'O' && board[1][0] == 'O' && board[2][0] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+
+    if (board[0][0] == 'X' && board[1][0] == 'X' && board[2][0] == 'X')
+
+        cout << "\nPlayer 2 Wins!";
+
+
+    if (board[0][1] == 'O' && board[1][1] == 'O' && board[2][1] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+
+    if (board[0][1] == 'X' && board[1][1] == 'X' && board[2][1] == 'X')
+
+        cout << "\nPlayer 2 Wins!";
+
+
+    if (board[0][2] == 'O' && board[1][2] == 'O' && board[2][2] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+
+    if (board[0][2] == 'X' && board[1][2] == 'X' && board[2][2] == 'X')
+
+        cout << "\nPlayer 2 Wins!";
+
+
+    //Determinacion del jugador ganador cruzado 
+
+
+    if (board[0][0] == 'O' && board[1][1] == 'O' && board[2][2] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+
+    if (board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X')
+
+        cout << "\nPlayer 2 Wins!";
+
+
+    if (board[2][0] == 'O' && board[1][1] == 'O' && board[0][2] == 'O')
+
+        cout << "\nPlayer 1 Wins!";
+
+    if (board[2][0] == 'X' && board[1][1] == 'X' && board[0][2] == 'X')
+
+    cout << "\nPlayer 2 Wins!";
+
+    cout << "\n";
+
+
+    cout << "\nTHANKS FOR PLAYING!";
+ 
 }
 
 
