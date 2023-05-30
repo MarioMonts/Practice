@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <clocale>
 
 using namespace std;
 
@@ -19,14 +20,170 @@ void ahorcado();
 void swap();
 void inventoryDisplay();
 void MatrixBox();
+void tiktaktok();
 
 //References
 void badSwap(int x, int y);
 void goodSwap(int& x, int& y);
 void display(const vector<string>& vec);
 
+//Funcion Examen II
+string GetRandomItem(vector<string>& items);
+void DisplayInventory(vector<string>& inventory);
+bool AskYesNo(string question);
+void ShowMenu();
+
+//Constantes Examen II
+const int MAX_ITEMS = 6; //va constante porque el valor va a ir bajando.
+const int SPACE_COST = 6; //va constante porque el valor va a ir bajando.
+const int FREE_ITEMS = 3; //va constante porque el valor va a ir bajando.
 
 int main()
+
+{
+    
+    //Solucion Examen II - Profesor
+
+    std::setlocale(LC_ALL, "es_ES.UTF-8"); //Linea para que al poner simbolos en Español, no me salgan cosas raras en consola
+    unsigned int gems = 8; // Se usa unsigned porque no queremos que se almacenen numeros Negativos
+
+    //Items
+    vector <string> items = { "espada", "martillo", "bomba", "escudo" };
+
+    //Inventory
+    vector <string> inventory;
+    inventory.reserve(MAX_ITEMS); //Reserve se usa para reservar espacios de memoria para que el vector no haga lo que quiera y no incremente los espacios. Para que unicamente sean 6 en este caso
+    vector <string> ::const_iterator iter; //creamos un Iterador para recorrer nuestros ciclos como con un For
+
+    bool isContinue;
+
+    do {
+        //Recoger de manera aleatoria items 
+        cout << "\n--INVENTARIO--\n";
+        cout << "Gema: " << gems << endl;
+        string itemFound = GetRandomItem(items);
+
+        cout << "Has encontrado un(a) " << itemFound << "!!\n";
+        if (inventory.size() >= FREE_ITEMS)
+        {
+
+            ShowMenu();
+            int option = askNumber("\nElige un numero ", 3); //agregarle abajo la funcion del GuessMyNumber
+
+            switch (option)
+            {
+            case 1:
+                //RepalceItem
+                break;
+            case 2:
+                //BuySpace
+                break;
+
+            case 3:
+
+                break;
+
+            default:
+
+                break;
+            }
+
+        }
+
+        else
+        {
+
+            inventory.push_back(itemFound);
+        }
+
+  
+
+        //DisplayItems
+        DisplayInventory(inventory);
+
+        isContinue = AskYesNo("Seguir explorando?");
+
+    } while (isContinue);
+
+    cout << "\nVuelve pronto!!\n";
+
+
+}
+
+
+//Funcion para obtener items aleatorios de los 4 que tenemos arriba
+
+string GetRandomItem(vector<string>& items)
+{
+    srand(time(NULL));
+    int itemRandomIndex = (rand() % items.size());
+    string itemSelected = items[itemRandomIndex];
+
+    return itemSelected;
+
+}
+
+//Funcion para mostrar los items aleatorios encontrados
+
+void DisplayInventory(vector<string>& inventory)
+{
+
+    vector<string>::const_iterator iter;
+    int i = 0;
+    cout << "\n--Tus items--\n";
+    for (iter = inventory.begin(); iter != inventory.end(); iter++)
+    {
+        cout << i << "_" << * iter << endl; //se pone * para que la mano del iter no solo apunte, sino agarre
+
+    }
+
+
+
+}
+
+//Funcion para preguntar Si o No
+
+bool AskYesNo(string question)
+{
+
+    char answer;
+
+    do
+    {
+        cout << "\n" << question << "(y/n)";
+        cin >> answer;
+
+    } while (answer != 'y' && answer != 'n');
+
+    if (answer == 'y')
+    {
+        return true;
+
+    }
+
+    return false;
+
+
+}
+
+//Funcion para el Menu
+
+void ShowMenu()
+
+{
+
+    cout << "\nYa no tienes espacio para mas objetos, que te gustaria hacer: \n";
+    cout << "\n1. Reemplazar objeto.";
+    cout << "\n2. Continuar sin el objeto.";
+    cout << "\n3. Añadir un espacio por " << SPACE_COST<< " gemas";
+
+}
+
+
+
+
+
+void tiktaktok()
 
 {
 

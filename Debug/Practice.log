@@ -1,7 +1,8 @@
 ﻿  Practice.cpp
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(462,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(703,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(855,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(957,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Practice.cpp(1075,16): warning C4018: '<': signed/unsigned mismatch
-  Practice.vcxproj -> C:\Users\montesma\Documents\Personal\Semestre II\ProgramacionII\Practice\Debug\Practice.exe
+C:\Users\ALUMNOS\Desktop\MarioMontes\ProgramacionII\Practice\Practice.cpp(94,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\ALUMNOS\Desktop\MarioMontes\ProgramacionII\Practice\Practice.cpp(595,31): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\ALUMNOS\Desktop\MarioMontes\ProgramacionII\Practice\Practice.cpp(836,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\ALUMNOS\Desktop\MarioMontes\ProgramacionII\Practice\Practice.cpp(988,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\ALUMNOS\Desktop\MarioMontes\ProgramacionII\Practice\Practice.cpp(1090,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\ALUMNOS\Desktop\MarioMontes\ProgramacionII\Practice\Practice.cpp(1208,16): warning C4018: '<': no coinciden signed/unsigned
+  Practice.vcxproj -> C:\Users\ALUMNOS\Desktop\MarioMontes\ProgramacionII\Practice\Debug\Practice.exe
