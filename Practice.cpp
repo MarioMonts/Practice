@@ -32,6 +32,9 @@ string GetRandomItem(vector<string>& items);
 void DisplayInventory(vector<string>& inventory);
 bool AskYesNo(string question);
 void ShowMenu();
+int GuessParams(string question, int a, int b = 1);
+void ReplaceObject(vector <string> items);
+
 
 //Constantes Examen II
 const int MAX_ITEMS = 6; //va constante porque el valor va a ir bajando.
@@ -68,14 +71,19 @@ int main()
         {
 
             ShowMenu();
-            int option = askNumber("\nElige un numero ", 3); //agregarle abajo la funcion del GuessMyNumber
+            int option = GuessParams("\nElige un numero ", 3); //agregarle abajo la funcion del GuessMyNumber
 
             switch (option)
             {
             case 1:
-                //RepalceItem
+
+                ReplaceObject(items);
+
+
                 break;
+
             case 2:
+
                 //BuySpace
                 break;
 
@@ -138,8 +146,28 @@ void DisplayInventory(vector<string>& inventory)
     }
 
 
+}
+
+
+//Funcion para reemplazar un objeto
+
+void ReplaceObject(vector <string> items) 
+
+{
+    int space;
+    cout << "Enter the number of the space you would like to replace. Choose from 0 to " << items.size() - 1 << endl;
+    cin >> space;
+
+    srand(time(NULL));
+    int itemRandomIndex = (rand() % items.size());
+    string itemSelected = items[itemRandomIndex];
+
+    items[space] = itemSelected;
+    cout << "You have replaced your " << items[space] << " for " << itemSelected << endl;
 
 }
+
+
 
 //Funcion para preguntar Si o No
 
@@ -175,12 +203,31 @@ void ShowMenu()
     cout << "\nYa no tienes espacio para mas objetos, que te gustaria hacer: \n";
     cout << "\n1. Reemplazar objeto.";
     cout << "\n2. Continuar sin el objeto.";
-    cout << "\n3. Añadir un espacio por " << SPACE_COST<< " gemas";
+    cout << "\n3. Anadir un espacio por " << SPACE_COST<< " gemas";
 
 }
 
 
+//Funcion del GuessMyNumber
 
+int GuessParams(string question, int a, int b)
+{
+    int num = 0; /// Esta variable solo existe dentro de la funcion. Por lo tanto no puede usarse en el main
+    //si quisiera una variable global (que funcione en todos lados), tendria que ir arriba del main. Pero esto no es buena practica
+    //nunca hacer globales. Hay que hacer variables constantes. 
+
+    //Funciona al revés tambié, si pusiera una variable de main aquí, no la reconocería la función
+
+    do {
+
+        cout << question << "entre " << b << " y " << a << endl;
+        cin >> num;
+
+    } while (num > a || num < b); //el AND aqui no funcionaba porque no era posible. Se usa un OR
+
+    return num;
+
+}
 
 
 void tiktaktok()
