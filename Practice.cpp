@@ -33,7 +33,8 @@ void DisplayInventory(vector<string>& inventory);
 bool AskYesNo(string question);
 void ShowMenu();
 int GuessParams(string question, int a, int b = 1);
-void ReplaceObject(vector <string> items);
+void ReplaceItem(vector<string>& inventory, string itemFound);
+void BuySpace(vector<string>& inventory, unsigned int& gems, string itemFound);
 
 
 //Constantes Examen II
@@ -63,7 +64,7 @@ int main()
     do {
         //Recoger de manera aleatoria items 
         cout << "\n--INVENTARIO--\n";
-        cout << "Gema: " << gems << endl;
+        cout << "Gemas: " << gems << endl;
         string itemFound = GetRandomItem(items);
 
         cout << "Has encontrado un(a) " << itemFound << "!!\n";
@@ -71,28 +72,21 @@ int main()
         {
 
             ShowMenu();
-            int option = GuessParams("\nElige un numero ", 3); //agregarle abajo la funcion del GuessMyNumber
+            int option = GuessParams("\nElige un numero ", 3); 
 
             switch (option)
             {
             case 1:
 
-                ReplaceObject(items);
-
-
-                break;
-
-            case 2:
-
-                //BuySpace
+                ReplaceItem(inventory, itemFound);
                 break;
 
             case 3:
 
+                BuySpace(inventory, gems, itemFound);
                 break;
 
             default:
-
                 break;
             }
 
@@ -118,6 +112,54 @@ int main()
 
 }
 
+//Funcion para comprar mas espacio
+void BuySpace(vector<string>& inventory, unsigned int& gems, string itemFound)
+
+{
+
+    if (gems >= SPACE_COST) //las gemas me daba error, asi que tuve que meterlas como argumento en mi funcion
+    {
+
+        cout << "\n Espacio comprado con exito!!\n";
+        inventory.push_back(itemFound);
+        gems -= SPACE_COST; //la tenemos como global, por eso se puede usar. Solo las constantes se pueden definir como globales
+        //gems = gems - SPACE_COST; es lo mismo que arriba 
+        // gems --; es para qeu se reste en uno nada mas
+    }
+
+    else
+
+    {
+
+        cout << "\nNo tienes gemas suficientes !!\n";
+
+
+    }
+
+
+}
+
+//Funcion para reemplazar un objeto
+
+void ReplaceItem(vector<string>& inventory, string itemFound) //el "&" es para que entre como referencia para que el original se modifique y no quede como copia. Tambien le ponemos el itemFound porque se usa en la referencia mas abajo
+//sin el &, estariamos dejando el inventory como copia y para que surta efecto, hasta abajo tendriamos que poner un "return inventory". Pero esto usa mas memoria
+
+{
+    vector<string>::iterator iter; //No es const porque vamos a reemplazar un valor. Un iterador es un apuntador a un espacio de memoria (array, vector, etc.)
+    int itemChosen = 0;
+    cout << "\n¿Que item deseas reemplazar?\n";
+    DisplayInventory(inventory);
+    cin >> itemChosen; //define la posicion donde yo quiero reemplazar mi objeto
+    iter = inventory.begin() + itemChosen; //el iterador esta apuntando al inicio de mi vector mas la posicíon elegida
+    *iter = itemFound;//agarramos con el puntero el contenido de esa posicion y la igualamos al itemfound
+
+}
+
+
+
+
+
+
 
 //Funcion para obtener items aleatorios de los 4 que tenemos arriba
 
@@ -142,30 +184,16 @@ void DisplayInventory(vector<string>& inventory)
     for (iter = inventory.begin(); iter != inventory.end(); iter++)
     {
         cout << i << "_" << * iter << endl; //se pone * para que la mano del iter no solo apunte, sino agarre
-
+        i++;
     }
 
 
 }
 
 
-//Funcion para reemplazar un objeto
 
-void ReplaceObject(vector <string> items) 
 
-{
-    int space;
-    cout << "Enter the number of the space you would like to replace. Choose from 0 to " << items.size() - 1 << endl;
-    cin >> space;
 
-    srand(time(NULL));
-    int itemRandomIndex = (rand() % items.size());
-    string itemSelected = items[itemRandomIndex];
-
-    items[space] = itemSelected;
-    cout << "You have replaced your " << items[space] << " for " << itemSelected << endl;
-
-}
 
 
 
@@ -212,7 +240,10 @@ void ShowMenu()
 
 int GuessParams(string question, int a, int b)
 {
-    int num = 0; /// Esta variable solo existe dentro de la funcion. Por lo tanto no puede usarse en el main
+
+    string input;
+    bool isValid = false;
+    // int num = 0; /// Esta variable solo existe dentro de la funcion. Por lo tanto no puede usarse en el main
     //si quisiera una variable global (que funcione en todos lados), tendria que ir arriba del main. Pero esto no es buena practica
     //nunca hacer globales. Hay que hacer variables constantes. 
 
@@ -221,11 +252,31 @@ int GuessParams(string question, int a, int b)
     do {
 
         cout << question << "entre " << b << " y " << a << endl;
-        cin >> num;
+        getline(cin, input); //se usa para que el jugador meta strings con espacios
 
-    } while (num > a || num < b); //el AND aqui no funcionaba porque no era posible. Se usa un OR
+        for (char c : input) // forma corta de hacer el for. Todo se almacena en la c hasta que se recorre todo el input
 
-    return num;
+        {
+            if (!isdigit(c)) // el ! es para negar algo, es lo mismo a isdigit = false
+            {
+                isValid = false;
+                break;
+            }
+
+        }
+
+
+        if (!isValid)
+        {
+            cout << "Entrada invalida, por favor elige solo numeros.";
+
+        }
+
+    } while (!isValid || input.empty());
+    
+    // while (num > a || num < b); //el AND aqui no funcionaba porque no era posible. Se usa un OR
+
+    return stoi(input); //String to Int es par aconvertir un string a un entero
 
 }
 
