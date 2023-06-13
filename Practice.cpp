@@ -253,13 +253,14 @@ int GuessParams(string question, int a, int b)
 
         cout << question << "entre " << b << " y " << a << endl;
         getline(cin, input); //se usa para que el jugador meta strings con espacios
+        cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
         for (char c : input) // forma corta de hacer el for. Todo se almacena en la c hasta que se recorre todo el input
 
         {
-            if (!isdigit(c)) // el ! es para negar algo, es lo mismo a isdigit = false
+            if (isdigit(c)) // el ! es para negar algo, es lo mismo a isdigit = false
             {
-                isValid = false;
+                isValid = true;
                 break;
             }
 
