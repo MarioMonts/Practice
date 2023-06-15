@@ -193,10 +193,6 @@ void DisplayInventory(vector<string>& inventory)
 
 
 
-
-
-
-
 //Funcion para preguntar Si o No
 
 bool AskYesNo(string question)
@@ -243,27 +239,42 @@ int GuessParams(string question, int a, int b)
 
     string input;
     bool isValid = false;
+    bool isRangeValid = false;
+    int number = 0;
+
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     // int num = 0; /// Esta variable solo existe dentro de la funcion. Por lo tanto no puede usarse en el main
     //si quisiera una variable global (que funcione en todos lados), tendria que ir arriba del main. Pero esto no es buena practica
     //nunca hacer globales. Hay que hacer variables constantes. 
-
+    // 
     //Funciona al revés tambié, si pusiera una variable de main aquí, no la reconocería la función
 
-    do {
+    do
+    {
 
-        cout << question << "entre " << b << " y " << a << endl;
-        getline(cin, input); //se usa para que el jugador meta strings con espacios
+        cout << question << "entre " << a << " y " << b << endl;
 
+        getline(cin, input); //se usa para que el jugador meta strings con espacios. Cadenas de texto con espacios
+       
         for (char c : input) // forma corta de hacer el for. Todo se almacena en la c hasta que se recorre todo el input
 
         {
-            if (!isdigit(c)) // el ! es para negar algo, es lo mismo a isdigit = false
+            if (!isdigit(c)) // el ! es para negar algo, es lo mismo a isdigit = false. Vamos iterando de letra en letra. Estoy evaluando si no es un digito. Si la primera letra es falsa, entonces pongo isValid = False. En caso de que se cumpla, IsValid = True, entonces se acaba el ciclo
+
             {
                 isValid = false;
-                break;
+                break; //para salir del for y salir de la iteracion de la cadena de string
             }
 
+            else
+            {
+                isValid = true;
+                break;
+
+            }
         }
+
+
 
 
         if (!isValid)
@@ -272,13 +283,32 @@ int GuessParams(string question, int a, int b)
 
         }
 
-    } while (!isValid || input.empty());
+        else
+
+        {
+            number = stoi(input);
+            isRangeValid = number <= a && number >= b;
+        }
+
+
+        if (!isRangeValid && isValid)
+        {
+            cout << "Entrada invalida, elige un numero dentro del rango establecido";
+
+        }
+
+
+    } while (!isValid || input.empty() || isRangeValid);
     
     // while (num > a || num < b); //el AND aqui no funcionaba porque no era posible. Se usa un OR
 
-    return stoi(input); //String to Int es par aconvertir un string a un entero
+    return number; //String to Int es par aconvertir un string a un entero
+
+    // cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); CODIGO PROFE. Es para ignorar elementos que no sean numeros
+
 
 }
+
 
 
 void tiktaktok()
