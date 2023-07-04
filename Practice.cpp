@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 void vectorsPart1();
 void vectorReserve();
 void iterators();
@@ -35,17 +34,112 @@ void ShowMenu();
 int GuessParams(string question, int a, int b = 1);
 void ReplaceItem(vector<string>& inventory, string itemFound);
 void BuySpace(vector<string>& inventory, unsigned int& gems, string itemFound);
-
+void examenII();
 
 //Constantes Examen II
 const int MAX_ITEMS = 6; //va constante porque el valor va a ir bajando.
 const int SPACE_COST = 6; //va constante porque el valor va a ir bajando.
 const int FREE_ITEMS = 3; //va constante porque el valor va a ir bajando.
 
+
+
+
+//Punteros 
+
 int main()
+{
+    //Un puntero de tipo INT NO puede apuntar a una variable de tipo String
+    //Punteros, son como referencias pero mas dinamicos en cuestion de memoria. Al apuntar.
+    //Simplemente apuntan a un espacio de memoria y obtienen su valor
+    std::setlocale(LC_ALL, "es_ES.UTF-8");
+
+    //Los punteros siempre por sintaxis siempre necesitan comenzar con la P
+    //No podemos declarar un puntero sin antes definirlo. En este caso es score
+    //declaracion de puntero para que apunte arriba (variable score). Apunta al espacio de memoria, no a lo que hay ahi.
+    //Puntero con ENTEROS
+    int score = 1000;
+    int* pScore = &score; //Siempre debe de llevar el & en el puntero
+
+    //Direccion de memoria: Para ver el ESPACIO de memoria donde esta almacenado la variable score
+    cout << &score << endl; //0084F79C
+    cout << pScore << endl; //0084F79C
+
+    //Contenido de la memoria: Me imprimiria el VALOR que en este caso es el 1000
+    cout << score << endl; //1000
+    cout << *pScore << endl; //1000
+
+    score += 500;
+
+    //Contenido de memoria
+    cout << score << endl; //1500
+    cout << *pScore << endl; //1500
+
+    *pScore += 500;
+    //Contenido de memoria
+    cout << score << endl; //2000
+    cout << *pScore << endl; //2000
+
+    //Los punteros pueden cambiar a donde apuntan. 
+    //NEW SCORE
+    int newScore = 5000;
+    pScore = &newScore; //Estoy cambiando a donde apunta mi puntero
+
+    //Direccion de memoria
+    cout << &newScore << endl; //0036F768
+    cout << pScore << endl; //0036F768
+
+    //Contenido de la memoria
+    cout << newScore << endl; //5000
+    cout << *pScore << endl; //5000
+
+    //Ahora haremos puntero con STRING
+
+    string str = "score";
+    string* pStr = &str;
+
+    cout << str << endl; //score
+    cout << *pStr << endl; //score
+
+    cout << str.size() << endl; // 5 Esto imprime el tamaño del valor de la variable
+    cout << (*pStr).size() << endl;//5 Esto es para imprimir el tamaño valor de lo que tiene el puntero
+    cout << pStr->size() << endl; //5 Esto es la misma sintaxis que la linea anterior
+
+    //Ahora haremos Punteros CONSTANTE
+    int lives = 5;
+    int* const plives = &lives;
+
+    //NO VALID porque se esta cambiando la direccion a la que apunta y CONST justo no quiere eso
+    //int maxLives = 10;
+    //pLives = &maxlives;
+
+
+    //A pointer to a Constant. Protege el contenido de lo que apunta el puntero
+    int initialDefense = 100;
+    const int* pNumber; //Declaro puntero
+
+    int defense = 32; //Creo variable
+    pNumber = &defense; // Lo igualamos a Defense
+
+    //VALID
+    defense *= 2;
+    cout << defense << endl;
+    cout << *pNumber << endl;
+
+    //NO VALID
+    //*pNumber *=2;
+
+    //Constant pointer to a constant
+
+    int bonus = 40;
+    const int* const pBonus = &bonus;
+
+}
+
+
+void examenII()
 
 {
-    
+
     //Solucion Examen II - Profesor
 
     std::setlocale(LC_ALL, "es_ES.UTF-8"); //Linea para que al poner simbolos en Español, no me salgan cosas raras en consola
@@ -72,7 +166,7 @@ int main()
         {
 
             ShowMenu();
-            int option = GuessParams("\nElige un numero ", 3); 
+            int option = GuessParams("\nElige un numero ", 3);
 
             switch (option)
             {
@@ -98,7 +192,7 @@ int main()
             inventory.push_back(itemFound);
         }
 
-  
+
 
         //DisplayItems
         DisplayInventory(inventory);
@@ -183,12 +277,16 @@ void DisplayInventory(vector<string>& inventory)
     cout << "\n--Tus items--\n";
     for (iter = inventory.begin(); iter != inventory.end(); iter++)
     {
-        cout << i << "_" << * iter << endl; //se pone * para que la mano del iter no solo apunte, sino agarre
+        cout << i << "_" << *iter << endl; //se pone * para que la mano del iter no solo apunte, sino agarre
         i++;
     }
 
 
 }
+
+
+
+
 
 
 
@@ -227,7 +325,7 @@ void ShowMenu()
     cout << "\nYa no tienes espacio para mas objetos, que te gustaria hacer: \n";
     cout << "\n1. Reemplazar objeto.";
     cout << "\n2. Continuar sin el objeto.";
-    cout << "\n3. Anadir un espacio por " << SPACE_COST<< " gemas";
+    cout << "\n3. Anadir un espacio por " << SPACE_COST << " gemas";
 
 }
 
@@ -239,42 +337,28 @@ int GuessParams(string question, int a, int b)
 
     string input;
     bool isValid = false;
-    bool isRangeValid = false;
-    int number = 0;
-
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     // int num = 0; /// Esta variable solo existe dentro de la funcion. Por lo tanto no puede usarse en el main
     //si quisiera una variable global (que funcione en todos lados), tendria que ir arriba del main. Pero esto no es buena practica
     //nunca hacer globales. Hay que hacer variables constantes. 
-    // 
+
     //Funciona al revés tambié, si pusiera una variable de main aquí, no la reconocería la función
 
-    do
-    {
+    do {
 
-        cout << question << "entre " << a << " y " << b << endl;
+        cout << question << "entre " << b << " y " << a << endl;
+        getline(cin, input); //se usa para que el jugador meta strings con espacios
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-        getline(cin, input); //se usa para que el jugador meta strings con espacios. Cadenas de texto con espacios
-       
         for (char c : input) // forma corta de hacer el for. Todo se almacena en la c hasta que se recorre todo el input
 
         {
-            if (!isdigit(c)) // el ! es para negar algo, es lo mismo a isdigit = false. Vamos iterando de letra en letra. Estoy evaluando si no es un digito. Si la primera letra es falsa, entonces pongo isValid = False. En caso de que se cumpla, IsValid = True, entonces se acaba el ciclo
-
-            {
-                isValid = false;
-                break; //para salir del for y salir de la iteracion de la cadena de string
-            }
-
-            else
+            if (isdigit(c)) // el ! es para negar algo, es lo mismo a isdigit = false
             {
                 isValid = true;
                 break;
-
             }
+
         }
-
-
 
 
         if (!isValid)
@@ -283,32 +367,13 @@ int GuessParams(string question, int a, int b)
 
         }
 
-        else
+    } while (!isValid || input.empty());
 
-        {
-            number = stoi(input);
-            isRangeValid = number <= a && number >= b;
-        }
-
-
-        if (!isRangeValid && isValid)
-        {
-            cout << "Entrada invalida, elige un numero dentro del rango establecido";
-
-        }
-
-
-    } while (!isValid || input.empty() || isRangeValid);
-    
     // while (num > a || num < b); //el AND aqui no funcionaba porque no era posible. Se usa un OR
 
-    return number; //String to Int es par aconvertir un string a un entero
-
-    // cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); CODIGO PROFE. Es para ignorar elementos que no sean numeros
-
+    return stoi(input); //String to Int es par aconvertir un string a un entero
 
 }
-
 
 
 void tiktaktok()
@@ -353,7 +418,7 @@ void tiktaktok()
 
     }
 
-    
+
 
     do {
 
@@ -388,7 +453,7 @@ void tiktaktok()
             }
 
 
-    
+
 
         }
 
@@ -478,7 +543,7 @@ void tiktaktok()
     if (board[0][0] == 'O' && board[0][1] == 'O' && board[0][2] == 'O')
 
         cout << "\nPlayer 1 Wins!";
-   
+
 
     if (board[0][0] == 'X' && board[0][1] == 'X' && board[0][2] == 'X')
 
@@ -550,13 +615,13 @@ void tiktaktok()
 
     if (board[2][0] == 'X' && board[1][1] == 'X' && board[0][2] == 'X')
 
-    cout << "\nPlayer 2 Wins!";
+        cout << "\nPlayer 2 Wins!";
 
     cout << "\n";
 
 
     cout << "\nTHANKS FOR PLAYING!";
- 
+
 }
 
 
@@ -628,12 +693,10 @@ void display(const vector<string>& vec) //const se usa para que no modifique nad
 
 
 
-
 void swap()
 {
     int score1 = 20;
     int score2 = 100;
-
 
     //BAD SWAP
     badSwap(score1, score2); //Llamado a la funcion. Cuando se ejecuta, solo cambia los valores COPIA, no los originales.
@@ -648,7 +711,6 @@ void swap()
 
     cout << score1 << endl; //Ahora si me muestra los valores cambiados. Le puedo agregar &score1 para que me imprima el ESPACIO de memoria en lugar del valor
     cout << score2 << endl; //Ahora si me muestra los valores cambiados Le puedo agregar &score2 para que me imprima el ESPACIO de memoria en lugar del valor
-
 
 }
 
