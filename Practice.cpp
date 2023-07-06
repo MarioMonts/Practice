@@ -20,11 +20,14 @@ void swap();
 void inventoryDisplay();
 void MatrixBox();
 void tiktaktok();
+void swapPointers();
 
 //References
 void badSwap(int x, int y);
 void goodSwap(int& x, int& y);
 void display(const vector<string>& vec);
+void badSwapP(int x, int y);
+void goodSwapP(int* const px, int* const py);
 
 //Funcion Examen II
 string GetRandomItem(vector<string>& items);
@@ -40,9 +43,6 @@ void examenII();
 const int MAX_ITEMS = 6; //va constante porque el valor va a ir bajando.
 const int SPACE_COST = 6; //va constante porque el valor va a ir bajando.
 const int FREE_ITEMS = 3; //va constante porque el valor va a ir bajando.
-
-
-
 
 //Punteros 
 
@@ -133,7 +133,44 @@ int main()
     int bonus = 40;
     const int* const pBonus = &bonus;
 
+    swapPointers();
 }
+
+
+//SwapPointers
+void swapPointers()
+{
+    int score1 = 20;
+    int score2 = 100;
+
+    //BAD SWAP
+    badSwapP(score1, score2);
+
+    cout << "Score1: " << score1 << endl;
+    cout << "Score2: " << score2 << endl;
+
+    //GOOD SWAP
+    goodSwapP(&score1, &score2);
+
+    cout << "Score1: " << &score1 << endl;
+    cout << "Score2: " << &score2 << endl;
+}
+void badSwapP(int x, int y)
+{
+    int aux = x; // aux = 20
+    x = y; // x = 100;
+    y = aux; // y = 20;
+}
+
+void goodSwapP(int* const px, int* const py)
+{
+    int aux = *px; // aux = 20
+    *px = *py; // x = 100;
+    *py = aux; // y = 20;
+}
+
+
+
 
 
 void examenII()
